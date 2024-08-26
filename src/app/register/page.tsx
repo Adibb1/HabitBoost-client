@@ -4,6 +4,7 @@ import { registerUser } from "@/api/usersApi";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Register() {
   const [user, setUser] = useState({
@@ -128,7 +129,7 @@ export default function Register() {
           {/* Profile Picture Preview */}
           {preview && (
             <div className="mb-4">
-              <img
+              <Image
                 src={preview}
                 alt="Profile Preview"
                 className="w-32 h-32 object-cover rounded-full mx-auto"
