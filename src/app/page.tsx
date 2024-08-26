@@ -95,7 +95,7 @@ export default function Home() {
                         className="mr-4"
                         style={{ width: "30px", height: "30px" }}
                       />
-                      <div className="flex-1">
+                      <div className="flex-1 text-left">
                         <h3 className="text-lg md:text-xl font-medium text-[#283618] mb-1">
                           {habit.title}
                         </h3>
