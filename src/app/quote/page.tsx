@@ -152,7 +152,7 @@ export default function QuotePage() {
               className="flex flex-col bg-white p-4 shadow-sm border rounded-xl"
             >
               <blockquote className="text-lg italic text-black">
-                "{quote.text}"
+                &quot;{quote.text}&quot;
               </blockquote>
               <cite className="text-sm text-gray-500">
                 — @{quote.author.username}

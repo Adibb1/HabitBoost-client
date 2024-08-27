@@ -83,7 +83,9 @@ export default function Login() {
           </button>
         </form>
         <p className="text-center text-[#0081A7] mt-6">
-          <Link href="/register">Don't have an account? Register here.</Link>
+          <Link href="/register">
+            Don&quot;t have an account? Register here.
+          </Link>
         </p>
       </div>
     </div>
