@@ -29,7 +29,7 @@ export default function Home() {
 
   useEffect(() => {
     asyncFunc();
-  }, [decodedToken]);
+  }, [decodedToken, asyncFunc]);
 
   const randomHabits = habits.sort(() => 0.5 - Math.random()).slice(0, 3);
 
