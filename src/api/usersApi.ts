@@ -1,30 +1,45 @@
 import axios from "axios";
 
-//register
+// Register
 export const registerUser = async (user: any) => {
-  const res = await axios.post("http://localhost:5000/profile/register", user, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  const res = await axios.post(
+    "https://habitboost-server-1.onrender.com/profile/register",
+    user,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
   return res.data;
 };
-//login
+
+// Login
 export const loginUser = async (user: any) => {
-  const res = await axios.post("http://localhost:5000/profile/login", user);
+  const res = await axios.post(
+    "https://habitboost-server-1.onrender.com/profile/login",
+    user
+  );
   return res.data;
 };
-//get user
+
+// Get user
 export const getUser = async () => {
-  const res = await axios.get("http://localhost:5000/profile/");
+  const res = await axios.get(
+    "https://habitboost-server-1.onrender.com/profile/"
+  );
   return res.data;
 };
-//get user by id
+
+// Get user by ID
 export const getUserById = async (userid: any, auth: string) => {
-  const res = await axios.get(`http://localhost:5000/profile/${userid}`, {
-    headers: {
-      Authorization: `Bearer ${auth}`,
-    },
-  });
+  const res = await axios.get(
+    `https://habitboost-server-1.onrender.com/profile/${userid}`,
+    {
+      headers: {
+        Authorization: `Bearer ${auth}`,
+      },
+    }
+  );
   return res.data;
 };
