@@ -32,6 +32,7 @@ export default function BadgePage() {
         });
       });
       setOwnedBadges(ownedBadges);
+
       const unownedBadges = badges.badges.filter((badge: any) => {
         return !user.badges.some((userbadge: any) => {
           return userbadge.badge._id === badge._id;
