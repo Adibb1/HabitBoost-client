@@ -132,6 +132,8 @@ export default function Register() {
               <Image
                 src={preview}
                 alt="Profile Preview"
+                width={100}
+                height={100}
                 className="w-32 h-32 object-cover rounded-full mx-auto"
               />
             </div>

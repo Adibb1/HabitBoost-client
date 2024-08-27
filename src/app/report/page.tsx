@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import { getChallenge } from "@/api/challengesApi";
 import { getCookies } from "@/api/serverFn";
 import { useRouter } from "next/navigation";
+import { useJwt } from "react-jwt";
 
 export default function ReportOverviewPage() {
   const [token, setToken] = useState<string | null>(null);
+  const { decodedToken }: any = useJwt(token || "");
   const [challenges, setChallenges] = useState<any[]>([]);
   const router = useRouter();
 
@@ -47,6 +49,15 @@ export default function ReportOverviewPage() {
     );
   }
 
+  if (!decodedToken?.data.isAdmin) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-[#FDFCDC] p-6">
+        <div className="w-full max-w-screen-lg bg-white rounded-lg shadow-lg p-8">
+          <p className=" text-black">NOT AUTHORIZED</p>
+        </div>
+      </main>
+    );
+  }
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#FDFCDC] p-6">
       <div className="w-full max-w-screen-lg bg-white rounded-lg shadow-lg p-8">
