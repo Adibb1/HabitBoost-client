@@ -17,35 +17,37 @@ export default function BadgePage() {
   const { register, handleSubmit, reset } = useForm();
 
   const asyncFunc = useCallback(async () => {
-    const token: any = await getCookies("token");
-    setToken(token.value);
+    const tokenData: any = await getCookies("token");
+    setToken(tokenData.value);
 
-    if (decodedToken) {
-      const user: any = await getUserById(decodedToken.data._id, token.value);
-      setUser(user);
+    if (tokenData.value && decodedToken) {
+      const userData: any = await getUserById(
+        decodedToken.data._id,
+        tokenData.value
+      );
+      setUser(userData);
 
-      const badges = await getBadges(token.value);
+      const badgesData = await getBadges(tokenData.value);
 
-      const ownedBadges = badges.badges.filter((badge: any) => {
-        return user.badges.some((userbadge: any) => {
-          return userbadge.badge._id === badge._id;
-        });
-      });
-      setOwnedBadges(ownedBadges);
+      const owned = badgesData.badges.filter((badge: any) =>
+        userData.badges.some(
+          (userbadge: any) => userbadge.badge._id === badge._id
+        )
+      );
+      setOwnedBadges(owned);
 
-      const unownedBadges = badges.badges.filter((badge: any) => {
-        return !user.badges.some((userbadge: any) => {
-          return userbadge.badge._id === badge._id;
-        });
-      });
-      setUnownedBadges(unownedBadges);
+      const unowned = badgesData.badges.filter(
+        (badge: any) =>
+          !userData.badges.some(
+            (userbadge: any) => userbadge.badge._id === badge._id
+          )
+      );
+      setUnownedBadges(unowned);
     }
-    // eslint-disable-next-line
   }, [decodedToken]);
 
   useEffect(() => {
     asyncFunc();
-    // eslint-disable-next-line
   }, [asyncFunc]);
 
   if (!token) {
