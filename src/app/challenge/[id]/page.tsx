@@ -175,7 +175,7 @@ export default function ChallengeDetailPage() {
                     User: @{participant.user.username}
                   </p>
                   <p className="text-sm text-gray-600">
-                    Completed At:{" "}
+                    Completed At:
                     {new Date(participant.completedAt).toLocaleDateString()}
                   </p>
                   <p className="text-sm text-gray-600">

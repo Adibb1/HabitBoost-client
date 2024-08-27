@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "next/navigation";
 import {
   getChallengeById,
@@ -17,13 +17,13 @@ export default function ChallengeReportDetailPage() {
   const { challengeid } = useParams();
   const router = useRouter();
 
-  const asyncFunc = async () => {
+  const asyncFunc = useCallback(async () => {
     const token: any = await getCookies("token");
     setToken(token.value);
 
     const data = await getChallengeById(challengeid as string, token.value);
     setChallenge(data.challenges);
-  };
+  }, [challengeid]);
 
   useEffect(() => {
     if (challengeid) asyncFunc();
