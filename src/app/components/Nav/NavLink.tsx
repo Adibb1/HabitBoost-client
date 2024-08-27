@@ -14,7 +14,7 @@ export default function NavLinks() {
   const [streak, setStreak] = useState(0);
   const router = useRouter();
 
-  const asyncFunc = useCallback(async () => {
+  const asyncFunc = async () => {
     const loggedIn = await checkCookie("token");
     setIsLoggedIn(loggedIn);
 
@@ -28,11 +28,11 @@ export default function NavLinks() {
       (user: any) => user._id === decodedToken?.data._id
     );
     setStreak(currentUser?.streak.count);
-  }, [decodedToken]);
+  };
 
   useEffect(() => {
     asyncFunc();
-  }, [asyncFunc]);
+  }, [decodedToken, asyncFunc]);
 
   const userLogout = () => {
     Swal.fire({
