@@ -27,7 +27,7 @@ export default function ChallengeReportDetailPage() {
 
   useEffect(() => {
     if (challengeid) asyncFunc();
-  }, [challengeid, asyncFunc]);
+  }, [asyncFunc, challengeid]);
 
   if (!challenge || !token) {
     return (
