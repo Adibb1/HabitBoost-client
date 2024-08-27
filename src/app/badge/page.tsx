@@ -40,10 +40,12 @@ export default function BadgePage() {
       });
       setUnownedBadges(unownedBadges);
     }
+    // eslint-disable-next-line
   }, [decodedToken]);
 
   useEffect(() => {
     asyncFunc();
+    // eslint-disable-next-line
   }, [asyncFunc]);
 
   if (!token) {
