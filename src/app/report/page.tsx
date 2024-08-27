@@ -39,7 +39,7 @@ export default function ReportOverviewPage() {
 
   useEffect(() => {
     asyncFunc();
-  }, []);
+  }, [asyncFunc]);
 
   if (!challenges || !token) {
     return (

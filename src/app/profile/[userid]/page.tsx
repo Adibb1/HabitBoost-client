@@ -30,7 +30,7 @@ export default function ProfilePage() {
   };
   useEffect(() => {
     asyncFunction();
-  }, [token, userid]);
+  }, [token, userid, asyncFunction]);
 
   if (!token || !userid) {
     console.log(token, userid);

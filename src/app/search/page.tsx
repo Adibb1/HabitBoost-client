@@ -25,7 +25,7 @@ const SearchUsers = () => {
 
   useEffect(() => {
     handleSearch("");
-  }, []);
+  }, [handleSearch]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchQuery = e.target.value;

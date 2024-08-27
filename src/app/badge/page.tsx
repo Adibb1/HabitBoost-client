@@ -47,7 +47,7 @@ export default function BadgePage() {
 
   useEffect(() => {
     asyncFunc();
-  }, [decodedToken]);
+  }, [decodedToken, asyncFunc]);
 
   if (!token) {
     return (

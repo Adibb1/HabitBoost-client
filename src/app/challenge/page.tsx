@@ -34,7 +34,7 @@ export default function ChallengePage() {
   };
   useEffect(() => {
     asyncFunc();
-  }, [decodedToken]);
+  }, [decodedToken, asyncFunc]);
 
   if (!token || !decodedToken) {
     return (

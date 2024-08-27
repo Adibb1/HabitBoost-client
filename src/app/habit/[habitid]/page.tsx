@@ -31,7 +31,7 @@ export default function HabitDetailPage() {
   };
   useEffect(() => {
     asyncFunc();
-  }, []);
+  }, [asyncFunc]);
 
   if (!token) {
     return (

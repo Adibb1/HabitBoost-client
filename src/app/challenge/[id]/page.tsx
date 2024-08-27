@@ -32,7 +32,7 @@ export default function ChallengeDetailPage() {
   };
   useEffect(() => {
     if (id) asyncFunc();
-  }, [id]);
+  }, [id, asyncFunc]);
 
   if (!challenge || !token) {
     return (

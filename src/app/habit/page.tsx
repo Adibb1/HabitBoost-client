@@ -24,7 +24,7 @@ export default function HabitPage() {
 
   useEffect(() => {
     asyncFunc();
-  }, []);
+  }, [asyncFunc]);
 
   if (!token) {
     return (

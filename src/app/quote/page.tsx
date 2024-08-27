@@ -28,7 +28,7 @@ export default function QuotePage() {
 
   useEffect(() => {
     asyncFunc();
-  }, []);
+  }, [asyncFunc]);
 
   if (!token) {
     return (
@@ -104,7 +104,7 @@ export default function QuotePage() {
         {randomQuote && (
           <div className="max-w-xl p-8 bg-white rounded-lg shadow-lg">
             <blockquote className="text-4xl italic text-black text-center">
-              "{randomQuote.text}"
+              &apos;{randomQuote.text}&apos;
             </blockquote>
             <cite className="text-xl text-gray-500 block text-center mt-4">
               — @{randomQuote.author.username}
