@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getBadges, addBadge, editBadge, deleteBadge } from "@/api/badgesApi";
 import Swal from "sweetalert2";
 import { useJwt } from "react-jwt";
@@ -16,20 +16,16 @@ export default function BadgePage() {
   const [unownedBadges, setUnownedBadges] = useState<any[]>([]);
   const { register, handleSubmit, reset } = useForm();
 
-  const asyncFunc = async () => {
-    // Fetch token
+  const asyncFunc = useCallback(async () => {
     const token: any = await getCookies("token");
     setToken(token.value);
 
     if (decodedToken) {
-      //fetch current user
       const user: any = await getUserById(decodedToken.data._id, token.value);
       setUser(user);
 
-      //get all badges
       const badges = await getBadges(token.value);
 
-      //sort the badges
       const ownedBadges = badges.badges.filter((badge: any) => {
         return user.badges.some((userbadge: any) => {
           return userbadge.badge._id === badge._id;
@@ -43,11 +39,11 @@ export default function BadgePage() {
       });
       setUnownedBadges(unownedBadges);
     }
-  };
+  }, [decodedToken]);
 
   useEffect(() => {
     asyncFunc();
-  }, [decodedToken, asyncFunc]);
+  }, [asyncFunc]);
 
   if (!token) {
     return (

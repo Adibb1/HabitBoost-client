@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { checkCookie, logout, getCookies } from "@/api/serverFn";
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getUser } from "@/api/usersApi";
 import { useJwt } from "react-jwt";
 import Image from "next/image";
@@ -14,7 +14,7 @@ export default function NavLinks() {
   const [streak, setStreak] = useState(0);
   const router = useRouter();
 
-  const asyncFunc = async () => {
+  const asyncFunc = useCallback(async () => {
     const loggedIn = await checkCookie("token");
     setIsLoggedIn(loggedIn);
 
@@ -28,11 +28,11 @@ export default function NavLinks() {
       (user: any) => user._id === decodedToken?.data._id
     );
     setStreak(currentUser?.streak.count);
-  };
+  }, [decodedToken]);
 
   useEffect(() => {
     asyncFunc();
-  }, [decodedToken, asyncFunc]);
+  }, [asyncFunc]);
 
   const userLogout = () => {
     Swal.fire({

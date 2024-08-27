@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { checkCookie, getCookies } from "@/api/serverFn";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { useJwt } from "react-jwt";
 import { getHabits } from "@/api/habitsApi";
@@ -13,7 +13,7 @@ export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [habits, setHabits] = useState<any[]>([]);
 
-  const asyncFunc = async () => {
+  const asyncFunc = useCallback(async () => {
     const loggedIn = await checkCookie("token");
     setIsLoggedIn(loggedIn);
 
@@ -25,7 +25,7 @@ export default function Home() {
         setHabits(fetchedHabits);
       }
     }
-  };
+  }, [decodedToken]);
 
   useEffect(() => {
     asyncFunc();

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useJwt } from "react-jwt";
 import { getCookies } from "@/api/serverFn";
 import { getChallenge, addChallenge } from "@/api/challengesApi";
@@ -17,24 +17,22 @@ export default function ChallengePage() {
   const { register, handleSubmit, reset } = useForm();
   const [searchQuery, setSearchQuery] = useState<string>(""); // Search query state
 
-  const asyncFunc = async () => {
-    // fetch token
+  const asyncFunc = useCallback(async () => {
     const token: any = await getCookies("token");
     setToken(token.value);
 
-    // get challenges
     const challenges = await getChallenge(token.value);
     setChallenges(challenges.challenges);
 
-    // get current user
     if (decodedToken) {
       const user = await getUserById(decodedToken?.data._id, token.value);
       setUser(user);
     }
-  };
+  }, [decodedToken]);
+
   useEffect(() => {
     asyncFunc();
-  }, [decodedToken, asyncFunc]);
+  }, [asyncFunc]);
 
   if (!token || !decodedToken) {
     return (

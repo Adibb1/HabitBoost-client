@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useJwt } from "react-jwt";
 import { getCookies } from "@/api/serverFn";
 import {
@@ -20,7 +20,7 @@ export default function HabitDetailPage() {
   const { habitid } = useParams();
   const router = useRouter();
 
-  const asyncFunc = async () => {
+  const asyncFunc = useCallback(async () => {
     const token: any = await getCookies("token");
     setToken(token.value);
 
@@ -28,7 +28,8 @@ export default function HabitDetailPage() {
       const habit = await getHabitsById(habitid as string, token.value);
       setHabit(habit[0]);
     }
-  };
+  }, [habitid]);
+
   useEffect(() => {
     asyncFunc();
   }, [asyncFunc]);

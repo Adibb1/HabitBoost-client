@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useForm, FieldValues, FieldError } from "react-hook-form";
 import Swal from "sweetalert2";
 import { getQuotes, addQuote, deleteQuote } from "@/api/quotesApi";
@@ -19,12 +19,12 @@ export default function QuotePage() {
     mode: "onBlur",
   });
 
-  const asyncFunc = async () => {
+  const asyncFunc = useCallback(async () => {
     const token: any = await getCookies("token");
     setToken(token.value);
     const data = await getQuotes(token.value);
     setQuotes(data.quote);
-  };
+  }, []);
 
   useEffect(() => {
     asyncFunc();

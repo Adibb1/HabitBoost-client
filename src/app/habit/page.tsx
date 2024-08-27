@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getCookies } from "@/api/serverFn";
 import { getHabits, addHabits } from "@/api/habitsApi";
 import { useForm } from "react-hook-form";
@@ -13,14 +13,14 @@ export default function HabitPage() {
   const [searchQuery, setSearchQuery] = useState<string>(""); // Search Query
   const { register, handleSubmit, reset } = useForm();
 
-  const asyncFunc = async () => {
+  const asyncFunc = useCallback(async () => {
     const token: any = await getCookies("token");
     setToken(token.value);
 
     const habits = await getHabits(token.value);
     setHabits(habits);
     console.log(token.value);
-  };
+  }, []);
 
   useEffect(() => {
     asyncFunc();

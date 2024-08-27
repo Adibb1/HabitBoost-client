@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getChallenge } from "@/api/challengesApi";
 import { getCookies } from "@/api/serverFn";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,7 @@ export default function ReportOverviewPage() {
   const [challenges, setChallenges] = useState<any[]>([]);
   const router = useRouter();
 
-  const asyncFunc = async () => {
+  const asyncFunc = useCallback(async () => {
     const token: any = await getCookies("token");
     setToken(token.value);
 
@@ -35,7 +35,7 @@ export default function ReportOverviewPage() {
     });
 
     setChallenges(reportedChallenges);
-  };
+  }, []);
 
   useEffect(() => {
     asyncFunc();

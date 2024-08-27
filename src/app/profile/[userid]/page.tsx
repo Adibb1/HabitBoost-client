@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { getCookies } from "@/api/serverFn";
 import Link from "next/link";
@@ -12,7 +12,7 @@ export default function ProfilePage() {
   const [publicHabits, setPublicHabits] = useState<any[]>([]);
   const { userid } = useParams(); // get id from params
 
-  const asyncFunction = async () => {
+  const asyncFunction = useCallback(async () => {
     const token: any = await getCookies("token");
     setToken(token.value);
 
@@ -27,10 +27,11 @@ export default function ProfilePage() {
       );
       setPublicHabits(publicHabits);
     }
-  };
+  }, [userid]);
+
   useEffect(() => {
     asyncFunction();
-  }, [token, userid, asyncFunction]);
+  }, [asyncFunction]);
 
   if (!token || !userid) {
     console.log(token, userid);
