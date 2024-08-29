@@ -2,41 +2,31 @@ import axios from "axios";
 
 // Get all challenges
 export const getChallenge = async (auth: string) => {
-  const res = await axios.get(
-    "https://habitboost-server-1.onrender.com/challenge/",
-    {
-      headers: {
-        Authorization: `Bearer ${auth}`,
-      },
-    }
-  );
+  const res = await axios.get("http://localhost:5000/challenge/", {
+    headers: {
+      Authorization: `Bearer ${auth}`,
+    },
+  });
   return res.data;
 };
 
 // Get challenge by ID
 export const getChallengeById = async (id: string, auth: string) => {
-  const res = await axios.get(
-    `https://habitboost-server-1.onrender.com/challenge/${id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${auth}`,
-      },
-    }
-  );
+  const res = await axios.get(`http://localhost:5000/challenge/${id}`, {
+    headers: {
+      Authorization: `Bearer ${auth}`,
+    },
+  });
   return res.data;
 };
 
 // Add a challenge
 export const addChallenge = async (challenge: any, auth: string) => {
-  const res = await axios.post(
-    "https://habitboost-server-1.onrender.com/challenge",
-    challenge,
-    {
-      headers: {
-        Authorization: `Bearer ${auth}`,
-      },
-    }
-  );
+  const res = await axios.post("http://localhost:5000/challenge", challenge, {
+    headers: {
+      Authorization: `Bearer ${auth}`,
+    },
+  });
   return res.data;
 };
 
@@ -47,7 +37,7 @@ export const joinChallenge = async (
   auth: string
 ) => {
   const res = await axios.post(
-    `https://habitboost-server-1.onrender.com/challenge/${challengeid}`,
+    `http://localhost:5000/challenge/${challengeid}`,
     proof,
     {
       headers: {
@@ -62,7 +52,7 @@ export const joinChallenge = async (
 // Delete a challenge
 export const deleteChallenge = async (challengeid: string, auth: string) => {
   const res = await axios.delete(
-    `https://habitboost-server-1.onrender.com/challenge/${challengeid}`,
+    `http://localhost:5000/challenge/${challengeid}`,
     {
       headers: {
         Authorization: `Bearer ${auth}`,
@@ -79,7 +69,7 @@ export const userReport = async (
   auth: string
 ) => {
   const res = await axios.put(
-    `https://habitboost-server-1.onrender.com/challenge/${challengeid}/${userid}`,
+    `http://localhost:5000/challenge/${challengeid}/${userid}`,
     {},
     {
       headers: {
@@ -97,7 +87,7 @@ export const adminDeleteParticipation = async (
   auth: string
 ) => {
   const res = await axios.put(
-    `https://habitboost-server-1.onrender.com/challenge/${challengeid}/${userid}/delete`,
+    `http://localhost:5000/challenge/${challengeid}/${userid}/delete`,
     {},
     {
       headers: {
@@ -115,7 +105,7 @@ export const adminApproveParticipation = async (
   auth: string
 ) => {
   const res = await axios.put(
-    `https://habitboost-server-1.onrender.com/challenge/${challengeid}/${userid}/approve`,
+    `http://localhost:5000/challenge/${challengeid}/${userid}/approve`,
     {},
     {
       headers: {
