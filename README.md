@@ -4,7 +4,7 @@
 
 Follow these steps to clone and start the app:
 
-### Method 1: Using `nodemon`
+### Using `npm run dev`
 
 1. **Clone the repository:**
    ```bash
